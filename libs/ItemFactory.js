@@ -124,13 +124,13 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
     //this function will make accesories more precise based on other attributes
     //eg, all InfoOnlyAnalog items which start with the name 'Temperat' are considered temperature sensors
 
-    if (item.name.includes('emperat')) {
+    if (item.name.indexOf("emperat") !== -1) {
         item.type = "TemperatureSensor";
 
     } else if (item.name.indexOf("Humidity") !== -1) {
         item.type = "HumiditySensor";
 
-      } else if (item.name.includes('chtvocht')) {
+      } else if (item.name.indexOf("vocht") !==-1) {
           item.type = "HumiditySensor";
 
     } else if (item.type == "TimedSwitch") {
