@@ -70,7 +70,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 // https://github.com/nfarina/homebridge/issues/509
                 this.log("Platform - Accessory count limit (100) exceeded so skipping: '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " was skipped.");
             } else {
-                
+
                 var keyToLookup = key;
                 if (keyToLookup.indexOf('/') > -1) {
                     keyToLookup = keyToLookup.split('/')[0];
@@ -79,11 +79,11 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 var control = this.itemList[keyToLookup];
 
                 var controlRoom = null;
-				
+
 				if (this.platform.rooms.length == 0) {
 					//Show all rooms
 					accessoryList.push(accessory);
-					
+
 				} else {
 					//Filter rooms
 					if (control.room) {
@@ -124,11 +124,14 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
     //this function will make accesories more precise based on other attributes
     //eg, all InfoOnlyAnalog items which start with the name 'Temperat' are considered temperature sensors
 
-    if (item.name.startsWith('Temperat')) {
+    if (item.name.includes('emperat')) {
         item.type = "TemperatureSensor";
 
     } else if (item.name.indexOf("Humidity") !== -1) {
         item.type = "HumiditySensor";
+
+      } else if (item.name.includes('chtvocht')) {
+          item.type = "HumiditySensor";
 
     } else if (item.type == "TimedSwitch") {
             item.type = "TimedSwitch";
