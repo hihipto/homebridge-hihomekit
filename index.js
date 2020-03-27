@@ -34,7 +34,7 @@ module.exports = function(homebridge) {
             //Add childs of switch
             Utility.addSupportTo(ItemFactory.Lightbulb, ItemFactory.Switch);
             Utility.addSupportTo(ItemFactory.Pushbutton, ItemFactory.Switch);
-    homebridge.registerPlatform("homebridge-HiHomekit", "HiHomekit", LoxPlatform);
+    homebridge.registerPlatform("homebridge-HiHomeKit", "HiHomeKit", LoxPlatform);
 };
 
 // Platform constructor
