@@ -1,6 +1,6 @@
 {
   "name": "HiHomeKit",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Websocket based Loxone plugin for homebridge (https://github.com/nfarina/homebridge)",
   "main": "index.js",
   "repository": {
@@ -15,19 +15,19 @@
     "HomeKit",
     "iOS"
   ],
-  "author": "Sam Roose",
+  "author": "hihipto",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hihipto/HiHomeKit/issues"
   },
   "engines": {
-    "node": ">=0.12.0",
-    "homebridge": ">=0.2.0"
+    "node": "*",
+    "homebridge": "*"
   },
   "dependencies": {
-    "node-lox-ws-api": "^0.4.3",
-    "request": "^2.83.0",
-    "ws": "^3.3.3"
+    "node-lox-ws-api": "*",
+    "request": "*",
+    "ws": "*"
   },
   "homepage": "https://github.com/hihipto/HiHomeKit#readme"
 }
