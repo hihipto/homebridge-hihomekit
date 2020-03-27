@@ -1,6 +1,6 @@
 {
   "name": "HiHomeKit",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Websocket based Loxone plugin for homebridge (https://github.com/nfarina/homebridge)",
   "main": "index.js",
   "repository": {
