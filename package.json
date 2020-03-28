@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "node-lox-ws-api": "*",
+    "request": "*",
     "ws": "*"
   },
   "homepage": "https://github.com/hihipto/HiHomeKit#readme"
