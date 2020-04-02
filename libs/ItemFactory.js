@@ -121,6 +121,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
 
 exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform, catList) {
     var item = factory.itemList[itemId];
+    this.log('Type before checkCustomAttrs ' + item.name + ' type ' + item.type);
     //this function will make accesories more precise based on other attributes
     //eg, all InfoOnlyAnalog items which start with the name 'Temperat' are considered temperature sensors
 
