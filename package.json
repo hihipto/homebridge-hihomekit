@@ -25,8 +25,8 @@
     "homebridge": "*"
   },
   "dependencies": {
-    "node-lox-ws-api": "*",
-    "request": "*",
+    "node-lox-ws-api": "^0.4.5",
+    "request": "^2.88.2",
     "ws": "*"
   },
   "homepage": "https://github.com/hihipto/HiHomeKit#readme"
