@@ -3,7 +3,7 @@
 var request = require("request");
 
 var BlindsItem = function(widget,platform,homebridge) {
-
+    // Pieter test
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
     this.stateUuid = widget.states.position; //a blind always has a state called position, which is the uuid which will receive the event to read
