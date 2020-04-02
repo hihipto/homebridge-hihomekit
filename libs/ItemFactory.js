@@ -64,7 +64,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
             }
 
             var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge);
-            this.log("Platform - Accessory Found: " + this.itemList[key].name);
+            this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
 
             if (accessoryList.length > 99) {
                 // https://github.com/nfarina/homebridge/issues/509
