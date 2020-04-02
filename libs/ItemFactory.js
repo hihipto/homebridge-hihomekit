@@ -162,7 +162,10 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         } else if ((item.name.indexOf("Motion") !== -1) || (item.name.indexOf("Presence") !== -1)) {
             item.type = "MotionSensor";
 
-        } else if (item.name.indexOf("Door Contact") !== -1) {
+        } else if (item.name.indexOf("Door") !== -1) {
+            item.type = "ContactSensor";
+
+        } else if (item.name.indexOf("WC") !== -1) {
             item.type = "ContactSensor";
 
         }
