@@ -21,7 +21,7 @@ ContactSensorItem.prototype.callBack = function(value) {
 
     console.log("Got new state for ContactSensor: " + value);
 
-    this.isClosed = value;
+    this.isClosed = 1 - value; // Loxone logic is inverted
 
     //also make sure this change is directly communicated to HomeKit
     this.otherService
