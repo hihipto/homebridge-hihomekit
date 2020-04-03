@@ -11,6 +11,7 @@ exports.TimedSwitch = require('../items/TimedSwitchItem.js');
 exports.Lightbulb = require('../items/LightbulbItem.js');
 exports.Dimmer = require('../items/DimmerItem.js');
 exports.Jalousie = require('../items/BlindsItem.js');
+exports.EIBBlinds = require('../items/EIBBlindsItem.js');
 exports.Pushbutton = require('../items/PushbuttonItem.js');
 exports.Colorpicker = require('../items/ColorpickerItem.js');
 exports.Gate = require('../items/GateItem.js');
@@ -123,7 +124,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
     var item = factory.itemList[itemId];
     //console.log('Type before checkCustomAttrs ' + item.name + ' type ' + item.type);
     //this function will make accesories more precise based on other attributes
-    //eg, all InfoOnlyAnalog items which start with the name 'Temperat' are considered temperature sensors//
+    //eg, all InfoOnlyAnalog items which start with the name 'Temperat' are considered temperature sensors
 
     if (item.name.indexOf("emperat") !== -1) {
         item.type = "TemperatureSensor";
@@ -149,6 +150,11 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         } else if (item.type === "ColorPickerV2") { // Handle the new ColorPickerV2 which replaces the colorPicker in the new LightControllerV2
             item.type = "Colorpicker";
         }
+    }
+
+    if (item.type == "UpDownDigital" && item.name.indexOf("EIB") !== -1) {
+      console.log("Found EIB Blinds!! :-)");
+      item.type = "EIBBlinds";
     }
 
     if (item.type === "Gate") {

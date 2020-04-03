@@ -2,7 +2,7 @@
 
 var request = require("request");
 
-var BlindsItem = function(widget,platform,homebridge) {
+var EIBBlindsItem = function(widget,platform,homebridge) {
 
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
@@ -15,17 +15,17 @@ var BlindsItem = function(widget,platform,homebridge) {
     this.targetPosition = 100;
     this.startedPosition = 100;
 
-    BlindsItem.super_.call(this, widget,platform,homebridge);
+    EIBBlindsItem.super_.call(this, widget,platform,homebridge);
 
     this.positionState = this.homebridge.hap.Characteristic.PositionState.STOPPED;
 };
 
 // Register a listener to be notified of changes in this items value
-BlindsItem.prototype.initListener = function() {
+EIBBlindsItem.prototype.initListener = function() {
     this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
 };
 
-BlindsItem.prototype.callBack = function(value) {
+EIBBlindsItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
     //console.log("Got new state for blind " + value);
 
@@ -71,7 +71,7 @@ BlindsItem.prototype.callBack = function(value) {
 
 };
 
-BlindsItem.prototype.getOtherServices = function() {
+EIBBlindsItem.prototype.getOtherServices = function() {
 
     var otherService = new this.homebridge.hap.Service.WindowCovering();
 
@@ -91,19 +91,19 @@ BlindsItem.prototype.getOtherServices = function() {
     return otherService;
 };
 
-BlindsItem.prototype.getItemPositionState = function(callback) {
+EIBBlindsItem.prototype.getItemPositionState = function(callback) {
     callback(undefined,this.positionState);
 };
 
-BlindsItem.prototype.getItemTargetPosition = function(callback) {
+EIBBlindsItem.prototype.getItemTargetPosition = function(callback) {
     callback(undefined,this.targetPosition);
 };
 
-BlindsItem.prototype.getItemCurrentPosition = function(callback) {
+EIBBlindsItem.prototype.getItemCurrentPosition = function(callback) {
     callback(undefined,this.currentPosition);
 };
 
-BlindsItem.prototype.setItem = function(value, callback) {
+EIBBlindsItem.prototype.setItem = function(value, callback) {
 
     //sending new state (pct closed) to loxone
     var self = this;
@@ -129,4 +129,4 @@ BlindsItem.prototype.setItem = function(value, callback) {
 
 };
 
-module.exports = BlindsItem;
+module.exports = EIBBlindsItem;
