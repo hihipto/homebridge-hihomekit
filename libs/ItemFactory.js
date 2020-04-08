@@ -134,8 +134,9 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     console.log(JSON.stringify(this.knxScreens_Shared, null, 4));
     // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
     for (var room in this.knxScreens_Shared) {
-      room.position.parentBlind = room.updown;
+      console.log(JSON.stringify(room, null, 4));
       console.log(JSON.stringify(room.position, null, 4));
+      this.knxScreens_Shared[room].position.parentBlind = room.updown;
     }
 
     this.log('Platform - Total accessory count ' + accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
