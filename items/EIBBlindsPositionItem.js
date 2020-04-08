@@ -32,7 +32,7 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
     console.log("CALLBACK!! " + value);
     //console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " and state UUID " + this.stateUuid);
     console.log("My parent name is " + this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.name);
-    this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.callBack(value);
+    this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.prototype.callBack(value);
     //this.KNXScreens[this.name.split(" ")[1]].updown.callBack(value); // Calling the correct callBack function
     //console.log("My parent UUID is " + this.KNXScreens[this.name.split(" ")[1]].updown.stateUuid);
 };
