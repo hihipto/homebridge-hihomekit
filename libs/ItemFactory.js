@@ -271,7 +271,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
                         factory.itemList[controlUuid] = control;
-                        console.log("PIETER Control new item in itemList " + JSON.stringify(item, null, 4));
+                        console.log("PIETER Control new item in itemList " + JSON.stringify(control, null, 4));
 
                         // Check if the control has any subControls like LightController(V2)
                         if (control.subControls) {
