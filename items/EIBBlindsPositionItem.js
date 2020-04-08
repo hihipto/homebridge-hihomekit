@@ -34,7 +34,7 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
     var parentName = this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.name;
     console.log("My parent name is " + parentName);
 
-    for (accessory in this.factory.accessoryList) {
+    for (var accessory in this.factory.accessoryList) {
       if (this.factory.accessoryList[accessory].name == parentName) {
         this.factory.accessoryList[accessory].callBack(value);
       }
