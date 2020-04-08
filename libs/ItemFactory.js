@@ -70,11 +70,6 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
             //process additional attributes
             this.itemList[key] = exports.Factory.prototype.checkCustomAttrs(this, key, this.platform, this.catList);
 
-            // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
-            for (var room in this.knxScreens_Shared) {
-              room.position.parentBlind = room.updown;
-              console.log(JSON.stringify(room.position, null, 4));
-            }
 
             if (!(this.itemList[key].type in exports)){
                 this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " is an item not handled.");
@@ -136,6 +131,12 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         }
     }
 
+    // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
+    for (var room in this.knxScreens_Shared) {
+      room.position.parentBlind = room.updown;
+      console.log(JSON.stringify(room.position, null, 4));
+    }
+    
     this.log('Platform - Total accessory count ' + accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
     return accessoryList;
 };
