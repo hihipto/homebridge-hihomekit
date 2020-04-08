@@ -28,21 +28,8 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
 };
 
 EIBBlindsPositionItem.prototype.getOtherServices = function() {
-
+    // We need an item to return here, otherwise the Item cannot be accepted by homebridge
     var otherService = new this.homebridge.hap.Service.WindowCovering();
-
-    otherService.getCharacteristic(this.homebridge.hap.Characteristic.CurrentPosition)
-        .on('get', this.getItemCurrentPosition.bind(this))
-        .updateValue(this.currentPosition);
-
-    otherService.getCharacteristic(this.homebridge.hap.Characteristic.TargetPosition)
-        .on('set', this.setItem.bind(this))
-        .on('get', this.getItemTargetPosition.bind(this))
-        .updateValue(this.currentPosition);
-
-    otherService.getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
-        .on('get', this.getItemPositionState.bind(this))
-        .updateValue(this.positionState);
 
     return otherService;
 };
