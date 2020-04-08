@@ -287,7 +287,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         control.roomname = controlRoom.name;
                         control.knxScreens_Shared = factory.knxScreens_Shared;
                         factory.itemList[controlUuid] = control;
-                        console.log("PIETER Control new item in itemList " + JSON.stringify(control, null, 4));
+                        console.log("PIETER Control new item in itemList");
 
                         // Check if the control has any subControls like LightController(V2)
                         if (control.subControls) {
