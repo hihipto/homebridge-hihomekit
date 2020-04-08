@@ -31,24 +31,22 @@ EIBBlindsItem.prototype.initListener = function() {
 
 EIBBlindsItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
-    console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " and state UUID " + this.stateUuid);
+    console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID);
 
-    //incomign values from blinds are decimal (0 - 1)
-    value *= 100;
     //in Homekit, 100% means OPEN while in Loxone this means CLOSED: reverse
     value = parseInt(100 - value);
 
-    if(this.initialValue) {
-        //this is the initial value. therfore, also set current targetValue on the same
+    if (this.initialValue) {
+        // this is the initial value. therfore, also set current targetValue on the same
         this.targetPosition = value;
         this.initialValue = false;
     }
     //if extenal actor changed the blinds, it's important that we set the targetvalue to the new real situation
-    if(!this.inControl) {
+    if (!this.inControl) {
         this.targetPosition = value;
     }
 
-    //define states for Homekit
+    // define states for Homekit
     var delta = Math.abs(parseInt(value) - this.targetPosition),
         ps = this.homebridge.hap.Characteristic.PositionState.INCREASING;
     if (delta < 3) {

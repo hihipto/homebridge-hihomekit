@@ -23,12 +23,6 @@ exports.MotionSensor = require('../items/MotionSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
-class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
-  constructor() {
-    this.updown = null;
-    this.position = null;
-  }
-}
 
 exports.Factory = function(LoxPlatform, homebridge) {
     this.platform = LoxPlatform;
@@ -169,23 +163,24 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
     if (item.name.indexOf("Screen Slaapkamer") !== -1) {
       console.log("Found EIB Blinds!! :-) " + item.name);
-      //console.log(JSON.stringify(item.knxscreens, null, 4));
-      //console.log(JSON.stringify(item, null, 4));
+      console.log(JSON.stringify(item, null, 4));
+
+      console.log(JSON.stringify(knxScreens_Shared, null, 4));
 
       var room = item.name.split(" ")[1];
 
       if (item.type == "UpDownDigital") {
         item.type = "EIBBlinds";
-        if (!(room in item.knxscreens)) {
-          item.knxscreens[room] = new KNXScreen();
+        if (!(room in knxScreens_Shared)) {
+          knxScreens_Shared[room] = new KNXScreen();
         }
-        item.knxscreens[room].updown = item;
+        knxScreens_Shared[room].updown = item;
       } else if (item.type == "InfoOnlyAnalog") {
         item.type = "EIBBlindsPosition";
-        if (!(room in item.knxscreens)) {
-          item.knxscreens[room] = new KNXScreen();
+        if (!(room in knxScreens_Shared)) {
+          knxScreens_Shared[room] = new KNXScreen();
         }
-        item.knxscreens[room].position = item;
+        knxScreens_Shared[room].position = item;
       }
     }
 
@@ -284,9 +279,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         // Append the room name to the name for better identification
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
-                        console.log("this.screens " + factory.screens);
-                        control.knxscreens = factory.screens;
-                        control.customfield = "PIETER Custom field yoh";
+                        
                         factory.itemList[controlUuid] = control;
                         console.log("PIETER Control new item in itemList " + JSON.stringify(control, null, 4));
 

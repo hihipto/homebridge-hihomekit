@@ -6,6 +6,15 @@ var ItemFactory = require('./libs/ItemFactory.js');
 var Utility = require('./libs/Utility.js');
 var WSListener = require('./libs/WSListener.js');
 
+class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
+  constructor() {
+    this.updown = null;
+    this.position = null;
+  }
+}
+
+var KNXScreens_Shared = {}; // list to keep the KNX Screens
+
 module.exports = function(homebridge) {
     console.log("homebridge API version: " + homebridge.version);
 
