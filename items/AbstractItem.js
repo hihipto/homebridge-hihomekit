@@ -10,6 +10,8 @@ var AbstractItem = function(widget,platform,homebridge) {
     this.name = widget.name;
     this.UUID = homebridge.hap.uuid.generate(String(widget.uuidAction));
 
+    this.KNXScreens = null;
+
     // provide explicit UUID to prevent automatic UUID generation by homebridge (which would fail because of possibly equal item name)
     this.uuid_base = this.UUID;
 

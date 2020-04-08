@@ -175,13 +175,19 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
       if (item.type == "UpDownDigital") {
         item.type = "EIBBlinds";
-        factory.screens[room] = new KNXScreen();
+        if (factory.screens[room] == null) {
+          factory.screens[room] = new KNXScreen();
+        }
         factory.screens[room].updown = item;
       } else if (item.type == "InfoOnlyAnalog") {
         item.type = "EIBBlindsPositionItem";
-        factory.screens[room] = new KNXScreen();
+        if (factory.screens[room] == null) {
+          factory.screens[room] = new KNXScreen();
+        }
         factory.screens[room].position = item;
       }
+
+      item.KNXScreens = factory.screens;
     }
 
     if (item.type === "Gate") {
