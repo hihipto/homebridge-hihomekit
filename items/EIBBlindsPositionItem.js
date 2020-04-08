@@ -9,6 +9,9 @@ var EIBBlindsPositionItem = function(widget,platform,homebridge) {
     this.stateUuid = widget.states.position; //a blind always has a state called position, which is the uuid which will receive the event to read
 
     EIBBlindsPositionItem.super_.call(this, widget,platform,homebridge);
+
+    this.positionState = this.homebridge.hap.Characteristic.PositionState.STOPPED;
+
 };
 
 // Register a listener to be notified of changes in this items value
