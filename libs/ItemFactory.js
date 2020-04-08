@@ -175,12 +175,12 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
       if (item.type == "UpDownDigital") {
         item.type = "EIBBlinds";
-        this.screens[room] = new KNXScreen();
-        this.screens[room].updown = item;
+        factory.screens[room] = new KNXScreen();
+        factory.screens[room].updown = item;
       } else if (item.type == "InfoOnlyAnalog") {
         item.type = "EIBBlindsPositionItem";
-        this.screens[room] = new KNXScreen();
-        this.screens[room].position = item;
+        factory.screens[room] = new KNXScreen();
+        factory.screens[room].position = item;
       }
     }
 
