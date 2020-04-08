@@ -23,6 +23,12 @@ exports.MotionSensor = require('../items/MotionSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
+class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
+  constructor() {
+    this.updown = null;
+    this.position = null;
+  }
+}
 
 exports.Factory = function(LoxPlatform, homebridge, knxScreens_Shared) {
     this.platform = LoxPlatform;
