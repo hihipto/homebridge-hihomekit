@@ -170,8 +170,6 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
     if (item.name.indexOf("Screen Slaapkamer") !== -1) {
       console.log("Found EIB Blinds!! :-) " + item.name);
 
-      console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
-
       var room = item.name.split(" ")[1];
 
       if (item.type == "UpDownDigital") {
