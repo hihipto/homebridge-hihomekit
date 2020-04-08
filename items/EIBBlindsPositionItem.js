@@ -16,7 +16,7 @@ var EIBBlindsPositionItem = function(widget,platform,homebridge) {
 
 // Register a listener to be notified of changes in this items value
 EIBBlindsPositionItem.prototype.initListener = function() {
-    this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
+    this.platform.ws.registerListenerForUUID(this.uuidAction, this.callBack.bind(this));
 };
 
 EIBBlindsPositionItem.prototype.callBack = function(value) {
