@@ -284,6 +284,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
                         control.KNXScreens = this.screens;
+                        control.customfield = "PIETER Custom field yoh";
                         factory.itemList[controlUuid] = control;
                         console.log("PIETER Control new item in itemList " + JSON.stringify(control, null, 4));
 
