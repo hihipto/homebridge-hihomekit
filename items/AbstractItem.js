@@ -31,6 +31,7 @@ AbstractItem.prototype.getServices = function() {
     this.otherService = this.getOtherServices();
     console.log("Abstract Item initListener " + this.name);
     this.initListener();
+    console.log("Returning from getServices");
     return [this.informationService, this.otherService];
 };
 
