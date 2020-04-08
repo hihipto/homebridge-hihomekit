@@ -14,6 +14,7 @@ var EIBBlindsPositionItem = function(widget,platform,homebridge) {
 
 // Register a listener to be notified of changes in this items value
 EIBBlindsPositionItem.prototype.initListener = function() {
+    console.log("My parent name is " + this.KNXScreens[this.name.split(" ")[0]].updown.name);
     this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
 };
 

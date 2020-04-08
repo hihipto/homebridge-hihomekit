@@ -15,6 +15,8 @@ var EIBBlindsItem = function(widget,platform,homebridge) {
     this.targetPosition = 100;
     this.startedPosition = 100;
 
+    console.log("Creating EIBBlindsItem " + this.name);
+
     EIBBlindsItem.super_.call(this, widget,platform,homebridge);
 
     this.positionState = this.homebridge.hap.Characteristic.PositionState.STOPPED;
@@ -22,6 +24,7 @@ var EIBBlindsItem = function(widget,platform,homebridge) {
 
 // Register a listener to be notified of changes in this items value
 EIBBlindsItem.prototype.initListener = function() {
+    console.log("Registering listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
 };
 
