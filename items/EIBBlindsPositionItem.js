@@ -18,7 +18,7 @@ EIBBlindsPositionItem.prototype.initListener = function() {
 
 EIBBlindsPositionItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
-    console.log("Got new state for EIB blind " + value + " and UUID " this.UUID + " and state UUID " + this.stateUuid);
+    console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " and state UUID " + this.stateUuid);
 };
 
 EIBBlindsPositionItem.prototype.getOtherServices = function() {
