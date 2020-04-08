@@ -29,6 +29,7 @@ var AbstractItem = function(widget,platform,homebridge) {
 AbstractItem.prototype.getServices = function() {
     this.informationService = this.getInformationServices();
     this.otherService = this.getOtherServices();
+    console.log("Abstract Item initListener " + this.name);
     this.initListener();
     return [this.informationService, this.otherService];
 };
