@@ -31,7 +31,14 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
     console.log("CALLBACK!! " + value);
     //console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " and state UUID " + this.stateUuid);
-    console.log("My parent name is " + this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.name);
+    var parentName = this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.name;
+    console.log("My parent name is " + parentName);
+
+    for (accessory in this.factory.accessoryList) {
+      if (this.factory.accessoryList[accessory].name == parentName) {
+        this.factory.accessoryList[accessory].callBack(value);
+      }
+    }
     this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.prototype.callBack(value);
     //this.KNXScreens[this.name.split(" ")[1]].updown.callBack(value); // Calling the correct callBack function
     //console.log("My parent UUID is " + this.KNXScreens[this.name.split(" ")[1]].updown.stateUuid);
