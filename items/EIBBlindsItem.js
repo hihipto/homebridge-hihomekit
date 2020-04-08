@@ -9,7 +9,7 @@ class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
   }
 }
 
-var EIBBlindsItem = function(widget,platform,homebridge) {
+var EIBBlindsItem = function(widget,platform,homebridge, factory) {
 
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
@@ -21,7 +21,7 @@ var EIBBlindsItem = function(widget,platform,homebridge) {
     this.currentPosition = 100;
     this.targetPosition = 100;
     this.startedPosition = 100;
-
+    this.factory = factory;
 
     EIBBlindsItem.super_.call(this, widget,platform,homebridge);
 

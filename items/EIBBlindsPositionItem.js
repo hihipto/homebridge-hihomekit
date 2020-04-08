@@ -9,11 +9,12 @@ class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
   }
 }
 
-var EIBBlindsPositionItem = function(widget,platform,homebridge) {
+var EIBBlindsPositionItem = function(widget,platform,homebridge, factory) {
 
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
     this.stateUuid = widget.states.position; //a blind always has a state called position, which is the uuid which will receive the event to read
+    this.factory = factory;
 
     EIBBlindsPositionItem.super_.call(this, widget,platform,homebridge);
 
@@ -30,7 +31,7 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
     console.log("CALLBACK!! " + value);
     //console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " and state UUID " + this.stateUuid);
-    console.log("My parent name is " + this.parentBlind.name);
+    console.log("My parent name is " + this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.name);
     //this.KNXScreens[this.name.split(" ")[1]].updown.callBack(value); // Calling the correct callBack function
     //console.log("My parent UUID is " + this.KNXScreens[this.name.split(" ")[1]].updown.stateUuid);
 };

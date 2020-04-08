@@ -80,7 +80,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 continue;
             }
 
-            var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge);
+            var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
             this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
 
             if (accessoryList.length > 99) {
@@ -133,11 +133,14 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
 
     console.log(JSON.stringify(this.knxScreens_Shared, null, 4));
     // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
-    for (var room in this.knxScreens_Shared) {
-      console.log(JSON.stringify(room, null, 4));
-      console.log(JSON.stringify(room.position, null, 4));
-      this.knxScreens_Shared[room].position.parentBlind = room.updown;
-    }
+    //for (accessory in accessoryList) {
+    //  if (accessoryList[accessory].name.indexOf("Screen Slaapkamer") !== -1) {
+    //    for (var room in this.knxScreens_Shared) {
+          //this.knxScreens_Shared[room].position.parentBlind = room.updown;
+  //      }
+  //    }
+  //  }
+
 
     this.log('Platform - Total accessory count ' + accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
     return accessoryList;
