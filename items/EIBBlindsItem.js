@@ -16,6 +16,8 @@ var EIBBlindsItem = function(widget,platform,homebridge) {
     this.startedPosition = 100;
 
     console.log("Creating EIBBlindsItem " + this.name);
+    console.log("Name POS " + widget.name + " KNXScreens " + this.KNXScreens);
+
 
     EIBBlindsItem.super_.call(this, widget,platform,homebridge);
 
