@@ -34,12 +34,11 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
     var parentName = this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.name;
     console.log("My parent name is " + parentName);
 
-    for (var accessory in this.factory.accessoryList) {
+    for (var accessory in this.factory.accessoryList) { // Pieter find accessory in live accessories to call callBack function
       if (this.factory.accessoryList[accessory].name == parentName) {
         this.factory.accessoryList[accessory].callBack(value);
       }
     }
-    this.factory.knxScreens_Shared[this.name.split(" ")[1]].updown.prototype.callBack(value);
     //this.KNXScreens[this.name.split(" ")[1]].updown.callBack(value); // Calling the correct callBack function
     //console.log("My parent UUID is " + this.KNXScreens[this.name.split(" ")[1]].updown.stateUuid);
 };

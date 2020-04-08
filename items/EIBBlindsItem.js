@@ -97,6 +97,9 @@ EIBBlindsItem.prototype.getOtherServices = function() {
         .on('get', this.getItemPositionState.bind(this))
         .updateValue(this.positionState);
 
+    console.log("Returning otherService!");
+    console.log(JSON.stringify(otherService, null, 4));
+
     return otherService;
 };
 
