@@ -39,6 +39,7 @@ exports.Factory = function(LoxPlatform, homebridge, knxScreens_Shared) {
     this.roomList = {};
 
     this.knxScreens_Shared = knxScreens_Shared; // Pieter: Will keep the KNX screens as a list
+    this.accessoryList = [];
     // Loxone items should be named "Screen [ROOM] [function]"
     // [function] == Op_Neer => Main EIBBlindsItem which will have actions, status and be used in HomeKit
     // [function] == Positie FeedBack => "Dummy item (EIBBlindsPositionItem) receiving the value and updating Op_Neer EIBBlindsItem"
@@ -63,7 +64,6 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     //first, parse the Loxone JSON that holds all controls
     exports.Factory.prototype.traverseSitemap(jsonSitemap, this);
     //now convert these controls in accessories
-    var accessoryList = [];
 
     for (var key in this.itemList) {
         if (this.itemList.hasOwnProperty(key)) {
@@ -83,7 +83,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
             var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
             this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
 
-            if (accessoryList.length > 99) {
+            if (this.accessoryList.length > 99) {
                 // https://github.com/nfarina/homebridge/issues/509
                 this.log("Platform - Accessory count limit (100) exceeded so skipping: '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " was skipped.");
             } else {
@@ -99,7 +99,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
 
 				if (this.platform.rooms.length == 0) {
 					//Show all rooms
-					accessoryList.push(accessory);
+					this.accessoryList.push(accessory);
 
 				} else {
 					//Filter rooms
@@ -115,7 +115,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
 							if ((this.platform.moodSwitches == 'only') && (this.itemList[key].type !== 'LightControllerV2MoodSwitch')) {
 								this.log('Skipping as only moodswitched selected');
 							} else {
-								accessoryList.push(accessory);
+								this.accessoryList.push(accessory);
 							}
 						} else {
 							this.log('Platform - Skipping as room ' + controlRoom + ' is not in the config.json rooms list.');
@@ -142,8 +142,8 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
   //  }
 
 
-    this.log('Platform - Total accessory count ' + accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
-    return accessoryList;
+    this.log('Platform - Total accessory count ' + this.accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
+    return this.accessoryList;
 };
 
 
