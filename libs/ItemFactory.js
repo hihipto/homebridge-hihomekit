@@ -11,7 +11,10 @@ exports.TimedSwitch = require('../items/TimedSwitchItem.js');
 exports.Lightbulb = require('../items/LightbulbItem.js');
 exports.Dimmer = require('../items/DimmerItem.js');
 exports.Jalousie = require('../items/BlindsItem.js');
+// Pieter: KNX Blinds
 exports.EIBBlinds = require('../items/EIBBlindsItem.js');
+exports.EIBBlindsPositionItem = require('../items/EIBBlindsPositionItem.js');
+
 exports.Pushbutton = require('../items/PushbuttonItem.js');
 exports.Colorpicker = require('../items/ColorpickerItem.js');
 exports.Gate = require('../items/GateItem.js');
@@ -27,6 +30,11 @@ exports.Factory = function(LoxPlatform, homebridge) {
     this.itemList = {};
     this.catList = {};
     this.roomList = {};
+
+    this.screens = {}; // Pieter: Will keep the KNX screens as a list
+    // Loxone items should be named "Screen [ROOM] [function]"
+    // [function] == Op_Neer => Main EIBBlindsItem which will have actions, status and be used in HomeKit
+    // [function] == Positie FeedBack => "Dummy item (EIBBlindsPositionItem) receiving the value and updating Op_Neer EIBBlindsItem"
     //this.uniqueIds = [];
 };
 
@@ -152,9 +160,19 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
     }
 
-    if (item.type == "UpDownDigital" && item.name.indexOf("EIB") !== -1) {
+    if (item.name.indexOf("Screen") !== -1) {
       console.log("Found EIB Blinds!! :-)");
-      item.type = "EIBBlinds";
+      console.log(JSON.stringify(item, null, 4));
+
+      var room = item.name.split(" ")[1];
+
+      if (item.type == "UpDownDigital") {
+        item.type = "EIBBlinds";
+        this.screens[room].updown = item;
+      } else if (item.type == "InfoOnlyAnalog") {
+        item.type = "EIBBlindsPositionItem";
+        this.screens[room].position = item;
+      }
     }
 
     if (item.type === "Gate") {
@@ -253,6 +271,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
                         factory.itemList[controlUuid] = control;
+                        console.log("PIETER Control new item in itemList " + JSON.stringify(item, null, 4));
 
                         // Check if the control has any subControls like LightController(V2)
                         if (control.subControls) {

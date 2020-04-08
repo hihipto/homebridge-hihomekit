@@ -27,7 +27,7 @@ EIBBlindsItem.prototype.initListener = function() {
 
 EIBBlindsItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
-    //console.log("Got new state for blind " + value);
+    console.log("Got new state for EIB blind " + value + " and UUID " this.UUID + " and state UUID " + this.stateUuid);
 
     //incomign values from blinds are decimal (0 - 1)
     value *= 100;

@@ -29,7 +29,11 @@ module.exports = function(homebridge) {
     Utility.addSupportTo(ItemFactory.Gate, ItemFactory.AbstractItem);
     Utility.addSupportTo(ItemFactory.DoorBell, ItemFactory.AbstractItem);
     Utility.addSupportTo(ItemFactory.Jalousie, ItemFactory.AbstractItem);
-    Utility.addSupportTo(ItemFactory.EIBBlinds, ItemFactory.AbstractItem); // ADD New Item for Phil
+
+    Utility.addSupportTo(ItemFactory.EIBBlinds, ItemFactory.AbstractItem); // Pieter: ADD New KNX Blinds for Phil
+    Utility.addSupportTo(ItemFactory.EIBBlindsPosition, ItemFactory.AbstractItem); // Pieter: ADD New KNX Blinds for Phil
+
+
     Utility.addSupportTo(ItemFactory.TimedSwitch, ItemFactory.AbstractItem);
     Utility.addSupportTo(ItemFactory.Switch, ItemFactory.AbstractItem);
     //Add childs of switch

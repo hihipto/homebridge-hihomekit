@@ -121,7 +121,7 @@ WSListener.prototype.startListener = function () {
 
 WSListener.prototype.registerListenerForUUID = function (uuid, callback) {
     //function that the Item classes will call to listen in on a specific UUID message
-   // console.log("Registering listener for UUID " + uuid);
+    // console.log("Registering listener for UUID " + uuid);
     if (uuid in this.uuidCallbacks) {
         this.uuidCallbacks[uuid].push(callback);
     } else {
