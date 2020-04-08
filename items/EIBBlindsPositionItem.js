@@ -8,7 +8,7 @@ var EIBBlindsPositionItem = function(widget,platform,homebridge) {
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
     this.stateUuid = widget.states.position; //a blind always has a state called position, which is the uuid which will receive the event to read
     this.name = widget.name;
-    console.log("Name " + widget.name;);
+    console.log("Name " + widget.name);
     console.log("My parent name is " + this.KNXScreens[this.name.split(" ")[0]].updown.name);
     EIBBlindsPositionItem.super_.call(this, widget,platform,homebridge);
 };
