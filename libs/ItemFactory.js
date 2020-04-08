@@ -13,7 +13,7 @@ exports.Dimmer = require('../items/DimmerItem.js');
 exports.Jalousie = require('../items/BlindsItem.js');
 // Pieter: KNX Blinds
 exports.EIBBlinds = require('../items/EIBBlindsItem.js');
-exports.EIBBlindsPositionItem = require('../items/EIBBlindsPositionItem.js');
+exports.EIBBlindsPosition = require('../items/EIBBlindsPositionItem.js');
 
 exports.Pushbutton = require('../items/PushbuttonItem.js');
 exports.Colorpicker = require('../items/ColorpickerItem.js');
