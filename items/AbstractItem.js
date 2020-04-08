@@ -2,14 +2,14 @@
 
 var WSListener = require('../libs/WSListener.js');
 
-var AbstractItem = function(widget,platform,homebridge, factory) {
+var AbstractItem = function(widget,platform,homebridge) {
     this.platform = platform;
     this.widget =  widget;
     this.homebridge = homebridge;
     this.log = this.platform.log;
     this.name = widget.name;
     this.UUID = homebridge.hap.uuid.generate(String(widget.uuidAction));
-    this.factory = factory;
+
     console.log("Newly generated UUID " + this.UUID);
 
     // provide explicit UUID to prevent automatic UUID generation by homebridge (which would fail because of possibly equal item name)
