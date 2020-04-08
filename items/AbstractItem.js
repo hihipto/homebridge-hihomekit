@@ -9,6 +9,7 @@ var AbstractItem = function(widget,platform,homebridge) {
     this.log = this.platform.log;
     this.name = widget.name;
     this.UUID = homebridge.hap.uuid.generate(String(widget.uuidAction));
+    console.log("Newly generated UUID " + this.UUID);
 
     this.KNXScreens = null;
 
@@ -29,7 +30,7 @@ var AbstractItem = function(widget,platform,homebridge) {
 AbstractItem.prototype.getServices = function() {
     this.informationService = this.getInformationServices();
     this.otherService = this.getOtherServices();
-    console.log("Abstract Item initListener " + this.name);
+    console.log("Abstract Item initListener " + this.name + " " + this.UUID);
     this.initListener();
     console.log("Returning from getServices");
     return [this.informationService, this.otherService];
