@@ -187,6 +187,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         factory.screens[room].position = item;
       }
 
+      console.log("Assigning KNXScreens list!");
       item.KNXScreens = factory.screens;
     }
 
