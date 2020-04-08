@@ -167,7 +167,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
     }
 
-    if (item.name.indexOf("Screen") !== -1) {
+    if (item.name.indexOf("Screen Slaapkamer") !== -1) {
       console.log("Found EIB Blinds!! :-)");
       console.log(JSON.stringify(item, null, 4));
 
