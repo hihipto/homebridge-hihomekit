@@ -171,7 +171,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       console.log("Found EIB Blinds!! :-) " + item.name);
       console.log(JSON.stringify(item, null, 4));
 
-      console.log(JSON.stringify(knxScreens_Shared, null, 4));
+      console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
       var room = item.name.split(" ")[1];
 
