@@ -24,7 +24,7 @@ exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
 
-exports.Factory = function(LoxPlatform, homebridge) {
+exports.Factory = function(LoxPlatform, homebridge, knxScreens_Shared) {
     this.platform = LoxPlatform;
     this.log = this.platform.log;
     this.homebridge = homebridge;
@@ -32,7 +32,7 @@ exports.Factory = function(LoxPlatform, homebridge) {
     this.catList = {};
     this.roomList = {};
 
-    this.screens = {}; // Pieter: Will keep the KNX screens as a list
+    this.knxScreens_Shared = knxScreens_Shared; // Pieter: Will keep the KNX screens as a list
     // Loxone items should be named "Screen [ROOM] [function]"
     // [function] == Op_Neer => Main EIBBlindsItem which will have actions, status and be used in HomeKit
     // [function] == Positie FeedBack => "Dummy item (EIBBlindsPositionItem) receiving the value and updating Op_Neer EIBBlindsItem"
@@ -165,22 +165,22 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       console.log("Found EIB Blinds!! :-) " + item.name);
       console.log(JSON.stringify(item, null, 4));
 
-      console.log(JSON.stringify(knxScreens_Shared, null, 4));
+      console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
       var room = item.name.split(" ")[1];
 
       if (item.type == "UpDownDigital") {
         item.type = "EIBBlinds";
-        if (!(room in knxScreens_Shared)) {
-          knxScreens_Shared[room] = new KNXScreen();
+        if (!(room in factory.knxScreens_Shared)) {
+          factory.knxScreens_Shared[room] = new KNXScreen();
         }
-        knxScreens_Shared[room].updown = item;
+        factory.knxScreens_Shared[room].updown = item;
       } else if (item.type == "InfoOnlyAnalog") {
         item.type = "EIBBlindsPosition";
-        if (!(room in knxScreens_Shared)) {
-          knxScreens_Shared[room] = new KNXScreen();
+        if (!(room in factory.knxScreens_Shared)) {
+          factory.knxScreens_Shared[room] = new KNXScreen();
         }
-        knxScreens_Shared[room].position = item;
+        factory.knxScreens_Shared[room].position = item;
       }
     }
 
@@ -279,7 +279,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         // Append the room name to the name for better identification
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
-                        
+
                         factory.itemList[controlUuid] = control;
                         console.log("PIETER Control new item in itemList " + JSON.stringify(control, null, 4));
 

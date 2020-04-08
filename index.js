@@ -13,7 +13,7 @@ class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
   }
 }
 
-var KNXScreens_Shared = {}; // list to keep the KNX Screens
+var knxScreens_Shared = {}; // list to keep the KNX Screens
 
 module.exports = function(homebridge) {
     console.log("homebridge API version: " + homebridge.version);
@@ -89,7 +89,7 @@ function LoxPlatform(log, config) {
 LoxPlatform.prototype.accessories = function(callback) {
     var that = this;
     //this.log("Getting Loxone configuration.");
-    var itemFactory = new ItemFactory.Factory(this,Homebridge);
+    var itemFactory = new ItemFactory.Factory(this,Homebridge, knxScreens_Shared);
     var url = itemFactory.sitemapUrl();
     this.log("Platform - Waiting 8 seconds until initial state is retrieved via WebSocket.");
     setTimeout(function(){
