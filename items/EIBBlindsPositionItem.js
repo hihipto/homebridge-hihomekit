@@ -27,10 +27,6 @@ EIBBlindsPositionItem.prototype.callBack = function(value) {
     console.log("My parent UUID is " + this.KNXScreens[this.name.split(" ")[1]].updown.stateUuid);
 };
 
-EIBBlindsPositionItem.prototype.getOtherServices = function() {
-    console.log("Empty other services!")
-};
-
 EIBBlindsPositionItem.prototype.getItemPositionState = function(callback) {
     callback(undefined,this.positionState);
 };
