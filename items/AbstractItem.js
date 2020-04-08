@@ -11,7 +11,7 @@ var AbstractItem = function(widget,platform,homebridge) {
     this.UUID = homebridge.hap.uuid.generate(String(widget.uuidAction));
     console.log("Newly generated UUID " + this.UUID);
 
-    this.KNXScreens = null;
+    this.KNXScreens = {};
 
     // provide explicit UUID to prevent automatic UUID generation by homebridge (which would fail because of possibly equal item name)
     this.uuid_base = this.UUID;
