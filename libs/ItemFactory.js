@@ -180,7 +180,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
         factory.screens[room].updown = item;
       } else if (item.type == "InfoOnlyAnalog") {
-        item.type = "EIBBlindsPositionItem";
+        item.type = "EIBBlindsPosition";
         if (factory.screens[room] == null) {
           factory.screens[room] = new KNXScreen();
         }
