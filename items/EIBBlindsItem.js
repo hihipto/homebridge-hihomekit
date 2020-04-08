@@ -2,6 +2,13 @@
 
 var request = require("request");
 
+class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
+  constructor() {
+    this.updown = null;
+    this.position = null;
+  }
+}
+
 var EIBBlindsItem = function(widget,platform,homebridge) {
 
     this.platform = platform;
