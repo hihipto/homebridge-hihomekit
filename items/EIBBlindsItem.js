@@ -15,11 +15,12 @@ var EIBBlindsItem = function(widget,platform,homebridge) {
     this.targetPosition = 100;
     this.startedPosition = 100;
 
-    console.log("Creating EIBBlindsItem " + this.name);
-  
+
     EIBBlindsItem.super_.call(this, widget,platform,homebridge);
 
     this.positionState = this.homebridge.hap.Characteristic.PositionState.STOPPED;
+
+    console.log("Creating EIBBlindsItem " + this.name);
 };
 
 // Register a listener to be notified of changes in this items value
