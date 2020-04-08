@@ -23,6 +23,13 @@ exports.MotionSensor = require('../items/MotionSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
+class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
+  constructor() {
+    this.updown = null;
+    this.position = null;
+  }
+}
+
 exports.Factory = function(LoxPlatform, homebridge) {
     this.platform = LoxPlatform;
     this.log = this.platform.log;
@@ -168,9 +175,11 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
       if (item.type == "UpDownDigital") {
         item.type = "EIBBlinds";
+        this.screens[room] = new KNXScreen();
         this.screens[room].updown = item;
       } else if (item.type == "InfoOnlyAnalog") {
         item.type = "EIBBlindsPositionItem";
+        this.screens[room] = new KNXScreen();
         this.screens[room].position = item;
       }
     }
