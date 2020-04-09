@@ -20,6 +20,8 @@ exports.Colorpicker = require('../items/ColorpickerItem.js');
 exports.Gate = require('../items/GateItem.js');
 exports.DoorBell = require('../items/DoorBellItem.js');
 exports.MotionSensor = require('../items/MotionSensorItem.js');
+//Phil: adds leaksensor
+exports.LeakSensor = require('../items/LeakSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
@@ -214,6 +216,9 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
         } else if (item.name.indexOf("Door ") !== -1) {
             item.type = "ContactSensor";
+        //Phil: adding watersensor     
+        } else if (item.name.indexOf("Watersensor") !== -1) {
+            item.type = "LeakSensor";
 
         } else if (item.name.indexOf("Doorbell") !== -1) {
             item.type = "DoorBell";
