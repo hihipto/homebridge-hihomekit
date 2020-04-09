@@ -141,7 +141,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     for (var accessory in this.accessoryList) {
       if (this.accessoryList[accessory].name.indexOf("Screen") !== -1) {
         var access_name = this.accessoryList[accessory].name.split(" ");
-        list_child_UUID[this.accessoryList[accessory].name] = this.accessoryList[accessory].uuidAction;
+        list_child_pos_UUID[this.accessoryList[accessory].name] = this.accessoryList[accessory].uuidAction;
       }
     }
     for (var accessory in this.accessoryList) {
@@ -149,7 +149,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         var access_name = this.accessoryList[accessory].name.split(" ");
         if (access_name[2] == "Op_Neer") {
           // assign "Positie" callback UUID to "Op_Neer" main Blinds item
-          this.accessoryList[accessory].initAdditionalListener(list_child_UUID[this.accessoryList[accessory].name]);
+          this.accessoryList[accessory].initAdditionalListener(list_child_pos_UUID[this.accessoryList[accessory].name]);
         }
       }
     }
