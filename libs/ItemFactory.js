@@ -197,7 +197,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       } else if (item.type == "InfoOnlyAnalog") {
         var access_name = item.name.split(" ");
         if (access_name[2] == "Positie") {
-          this.list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
+          factory.list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
         }
       }
     }
