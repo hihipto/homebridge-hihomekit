@@ -135,14 +135,25 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         }
     }
 
+
+    list_child_pos_UUID = {};
     // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
-    //for (accessory in accessoryList) {
-    //  if (accessoryList[accessory].name.indexOf("Screen Slaapkamer") !== -1) {
-    //    for (var room in this.knxScreens_Shared) {
-          //this.knxScreens_Shared[room].position.parentBlind = room.updown;
-  //      }
-  //    }
-  //  }
+    for (var accessory in accessoryList) {
+      if (accessoryList[accessory].name.indexOf("Screen") !== -1) {
+        var access_name = accessoryList[accessory].name.split(" ");
+        list_child_UUID[accessoryList[accessory].name] = accessoryList[accessory].uuidAction;
+      }
+    }
+    for (var accessory in accessoryList) {
+      if (accessoryList[accessory].name.indexOf("Screen") !== -1) {
+        var access_name = accessoryList[accessory].name.split(" ");
+        if (access_name[2] == "Op_Neer") {
+          // assign "Positie" callback UUID to "Op_Neer" main Blinds item
+          accessoryList[accessory].initAdditionalListener(list_child_UUID[accessoryList[accessory].name]);
+        }
+      }
+    }
+
 
 
     this.log('Platform - Total accessory count ' + this.accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
