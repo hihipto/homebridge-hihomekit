@@ -77,7 +77,9 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
   }
 
   for (var key in this.itemList) {
+    console.log("Begin for loop");
     if (this.itemList.hasOwnProperty(key)) {
+      console.log("I'm in");
       if (!(this.itemList[key].type in exports)) {
         this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " is an item not handled.");
         continue;
@@ -86,7 +88,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " was skipped.");
         continue;
       }
-      console.log("Hello! ");
+      console.log("Hello! " + this.itemList[key].name);
       if (this.itemList[key].name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screen special treatment
         var access_name = this.itemList[key].name.split(" ");
         if (access_name[2] == "Op_Neer") {
