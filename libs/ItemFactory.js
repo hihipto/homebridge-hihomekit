@@ -92,7 +92,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 var access_name = item.name.split(" ");
                 if (access_name[2] == "Op_Neer") {
                   // assign "Positie" callback UUID to "Op_Neer" main Blinds item
-                  var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, list_child_pos_UUID[access_name[1]]);
+                  var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
                   this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
                 }
             } else {
@@ -197,7 +197,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       } else if (item.type == "InfoOnlyAnalog") {
         var access_name = item.name.split(" ");
         if (access_name[2] == "Positie") {
-          list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
+          this.list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
         }
       }
     }
