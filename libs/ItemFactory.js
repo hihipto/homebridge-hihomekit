@@ -242,8 +242,8 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
         } else if ((item.name.indexOf("Brightness") !== -1) || (item.name.indexOf("Light Level") !== -1)) {
             item.type = 'LightSensor';
-        // Phil: adding WaterLevelSensor    
-      } else if ((item.name.indexOf("Waterput 2") !== -1) {
+        // Phil: adding WaterLevelSensor
+        } else if (item.name.indexOf("Waterput 2") !== -1) {
             item.type = 'WaterLevelSensor';
 
         } else if (item.name.indexOf("Temperature") !== -1) {
