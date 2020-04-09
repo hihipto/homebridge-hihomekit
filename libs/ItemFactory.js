@@ -23,7 +23,7 @@ exports.MotionSensor = require('../items/MotionSensorItem.js');
 //Phil: adds leaksensor
 exports.LeakSensor = require('../items/LeakSensorItem.js');
 //Phil: adds WaterLevelSensor
-exports.WaterLevelSensor = require('../items/WaterLevelSensorItem.js');
+//exports.WaterLevelSensor = require('../items/WaterLevelSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
