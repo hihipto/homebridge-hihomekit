@@ -42,7 +42,7 @@ module.exports = function(homebridge) {
     Utility.addSupportTo(ItemFactory.EIBBlinds, ItemFactory.AbstractItem); // Pieter: ADD New KNX Blinds for Phil
     Utility.addSupportTo(ItemFactory.EIBBlindsPosition, ItemFactory.AbstractItem); // Pieter: ADD New KNX Blinds for Phil
 
-
+    Utility.addSupportTo(ItemFactory.LeakSensor, ItemFactory.AbstractItem);//Phil:add leaksensor
     Utility.addSupportTo(ItemFactory.TimedSwitch, ItemFactory.AbstractItem);
     Utility.addSupportTo(ItemFactory.Switch, ItemFactory.AbstractItem);
     //Add childs of switch
