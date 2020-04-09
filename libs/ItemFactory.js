@@ -93,7 +93,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                   continue;
                   // assign "Positie" callback UUID to "Op_Neer" main Blinds item
                   console.log("New accessory Op_Neer " + this.itemList[key].name);
-                  var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
+                  //var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
                   this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
                 }
             } else {
