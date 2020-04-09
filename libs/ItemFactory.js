@@ -195,11 +195,11 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
     }
 
-    if (item.name.indexOf("Screen Slaapkamer") !== -1) {
+    //if (item.name.indexOf("Screen Slaapkamer") !== -1) {
+    if (0) {
       console.log("Found EIB Blinds!! :-) " + item.name);
-      console.log(JSON.stringify(item, null, 4));
-
-      console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
+      //console.log(JSON.stringify(item, null, 4));
+      //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
       var room = item.name.split(" ")[1];
 
@@ -319,7 +319,6 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         // Append the room name to the name for better identification
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
-                        //control.factory = factory;
                         factory.itemList[controlUuid] = control;
                         console.log("PIETER Control new item in itemList");
 
