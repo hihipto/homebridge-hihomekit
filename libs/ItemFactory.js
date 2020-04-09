@@ -97,12 +97,13 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                   var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
                   this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
                 }
-                continue;
+            } else {
+              console.log("New accessory " + this.itemList[key].name);
+              var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
+              this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
             }
 
-            console.log("New accessory " + this.itemList[key].name);
-            var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
-            this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
+
 
             if (this.accessoryList.length > 99) {
                 // https://github.com/nfarina/homebridge/issues/509
