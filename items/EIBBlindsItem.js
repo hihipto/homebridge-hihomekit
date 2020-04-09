@@ -41,7 +41,7 @@ EIBBlindsItem.prototype.initListener = function() {
 
 EIBBlindsItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
-    console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID);
+    console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " posUUID " + this.posActionUuid);
 
     //in Homekit, 100% means OPEN while in Loxone this means CLOSED: reverse
     value = parseInt(100 - value);

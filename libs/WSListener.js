@@ -123,16 +123,15 @@ WSListener.prototype.registerListenerForUUID = function (uuid, callback) {
     //function that the Item classes will call to listen in on a specific UUID message
     console.log("Registering listener for UUID " + uuid);
     if (uuid in this.uuidCallbacks) {
-        console.log("Pushing Call Back");
+        //console.log("Pushing Call Back");
         this.uuidCallbacks[uuid].push(callback);
     } else {
-        console.log("ELSE [callback]");
+        //console.log("ELSE [callback]");
         this.uuidCallbacks[uuid] = [callback];
     }
 
     // if we already have a state cached for this uuid, broadcast it to all currently registered callbacks
     if (uuid in this.uuidCache) {
-      console.log("UUID CACHED!");
         for (var r = 0; r < this.uuidCallbacks[uuid].length; r++) {
             this.uuidCallbacks[uuid][r](this.uuidCache[uuid]);
         }
