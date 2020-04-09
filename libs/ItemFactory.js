@@ -136,7 +136,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     }
 
 
-    list_child_pos_UUID = {};
+    var list_child_pos_UUID = {};
     // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
     for (var accessory in accessoryList) {
       if (accessoryList[accessory].name.indexOf("Screen") !== -1) {
