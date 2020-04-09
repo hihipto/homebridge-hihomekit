@@ -138,18 +138,18 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
 
     var list_child_pos_UUID = {};
     // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
-    for (var accessory in accessoryList) {
-      if (accessoryList[accessory].name.indexOf("Screen") !== -1) {
-        var access_name = accessoryList[accessory].name.split(" ");
-        list_child_UUID[accessoryList[accessory].name] = accessoryList[accessory].uuidAction;
+    for (var accessory in this.accessoryList) {
+      if (this.accessoryList[accessory].name.indexOf("Screen") !== -1) {
+        var access_name = this.accessoryList[accessory].name.split(" ");
+        list_child_UUID[this.accessoryList[accessory].name] = this.accessoryList[accessory].uuidAction;
       }
     }
-    for (var accessory in accessoryList) {
-      if (accessoryList[accessory].name.indexOf("Screen") !== -1) {
-        var access_name = accessoryList[accessory].name.split(" ");
+    for (var accessory in this.accessoryList) {
+      if (this.accessoryList[accessory].name.indexOf("Screen") !== -1) {
+        var access_name = this.accessoryList[accessory].name.split(" ");
         if (access_name[2] == "Op_Neer") {
           // assign "Positie" callback UUID to "Op_Neer" main Blinds item
-          accessoryList[accessory].initAdditionalListener(list_child_UUID[accessoryList[accessory].name]);
+          this.accessoryList[accessory].initAdditionalListener(list_child_UUID[this.accessoryList[accessory].name]);
         }
       }
     }
