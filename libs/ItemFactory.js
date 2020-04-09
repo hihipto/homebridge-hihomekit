@@ -91,10 +91,12 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 var access_name = this.itemList[key].name.split(" ");
                 if (access_name[2] == "Op_Neer") {
                   // assign "Positie" callback UUID to "Op_Neer" main Blinds item
+                  console.log("New accessory Op_Neer " + this.itemList[key].name);
                   var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
                   this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
                 }
             } else {
+              console.log("New accessory " + this.itemList[key].name);
               var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
               this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
             }
@@ -200,7 +202,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
       }
     }
-    
+
 
     if (item.type === "Gate") {
         item.type = "Gate";
@@ -304,7 +306,7 @@ exports.Factory.prototype.traverseSitemap = function(jsonSitmap, factory) {
                         control.name += (" in " + controlRoom.name);
                         control.roomname = controlRoom.name;
                         factory.itemList[controlUuid] = control;
-                        console.log("PIETER Control new item in itemList");
+                        console.log("PIETER Control new item in itemList " + control.name);
 
                         // Check if the control has any subControls like LightController(V2)
                         if (control.subControls) {
