@@ -77,9 +77,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
   }
 
   for (var key in this.itemList) {
-    console.log("Begin for loop");
     if (this.itemList.hasOwnProperty(key)) {
-      console.log("I'm in");
       if (!(this.itemList[key].type in exports)) {
         this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " is an item not handled.");
         continue;
@@ -88,19 +86,16 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " was skipped.");
         continue;
       }
-      console.log("Hello! " + this.itemList[key].name);
       if (this.itemList[key].name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screen special treatment
         var access_name = this.itemList[key].name.split(" ");
         if (access_name[2] == "Op_Neer") {
           // assign "Positie" callback UUID to "Op_Neer" main Blinds item
-          console.log("New accessory Op_Neer " + this.itemList[key].name);
           var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
           this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
         } else {
           continue; // If this continue; is not here, we can add an empty item to the accesory list
         }
       } else {
-        console.log("New accessory " + this.itemList[key].name);
         var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
         this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
       }
@@ -150,10 +145,6 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         }
       }
 
-    }
-    console.log("Progress accessory list!");
-    for (var accessory in this.accessoryList) {
-      console.log("Name " + this.accessoryList[accessory].name);
     }
   }
 
