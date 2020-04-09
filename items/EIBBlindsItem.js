@@ -34,7 +34,7 @@ var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid) {
 // Register a listener to be notified of changes in this items value
 EIBBlindsItem.prototype.initListener = function() {
     console.log("Registering listener for EIBBlindsItem " + this.name);
-    //this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
+    this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
     console.log("Registering additional listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.posActionUuid, this.callBack.bind(this));
 };
