@@ -13,7 +13,6 @@ exports.Dimmer = require('../items/DimmerItem.js');
 exports.Jalousie = require('../items/BlindsItem.js');
 // Pieter: KNX Blinds
 exports.EIBBlinds = require('../items/EIBBlindsItem.js');
-exports.EIBBlindsPosition = require('../items/EIBBlindsPositionItem.js');
 
 exports.Pushbutton = require('../items/PushbuttonItem.js');
 exports.Colorpicker = require('../items/ColorpickerItem.js');
@@ -201,27 +200,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
       }
     }
-    if (0) {
-      console.log("Found EIB Blinds!! :-) " + item.name);
-      //console.log(JSON.stringify(item, null, 4));
-      //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
-
-      var room = item.name.split(" ")[1];
-
-      if (item.type == "UpDownDigital") {
-        item.type = "EIBBlinds";
-        if (!(room in factory.knxScreens_Shared)) {
-          factory.knxScreens_Shared[room] = new KNXScreen();
-        }
-        factory.knxScreens_Shared[room].updown = item;
-      } else if (item.type == "InfoOnlyAnalog") {
-        item.type = "EIBBlindsPosition";
-        if (!(room in factory.knxScreens_Shared)) {
-          factory.knxScreens_Shared[room] = new KNXScreen();
-        }
-        factory.knxScreens_Shared[room].position = item;
-      }
-    }
+    
 
     if (item.type === "Gate") {
         item.type = "Gate";
