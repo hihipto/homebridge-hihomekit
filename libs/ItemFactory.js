@@ -44,6 +44,7 @@ exports.Factory = function(LoxPlatform, homebridge, knxScreens_Shared) {
 
     this.knxScreens_Shared = knxScreens_Shared; // Pieter: Will keep the KNX screens as a list
     this.accessoryList = [];
+    this.list_child_pos_UUID = {};
     // Loxone items should be named "Screen [ROOM] [function]"
     // [function] == Op_Neer => Main EIBBlindsItem which will have actions, status and be used in HomeKit
     // [function] == Positie FeedBack => "Dummy item (EIBBlindsPositionItem) receiving the value and updating Op_Neer EIBBlindsItem"
@@ -73,8 +74,10 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         if (this.itemList.hasOwnProperty(key)) {
             //process additional attributes
             this.itemList[key] = exports.Factory.prototype.checkCustomAttrs(this, key, this.platform, this.catList);
+        }
+    }
 
-
+    for (var key in this.itemList) {
             if (!(this.itemList[key].type in exports)){
                 this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " is an item not handled.");
                 continue;
@@ -84,8 +87,17 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 continue;
             }
 
-            var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
-            this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
+            if (item.name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screen special treatment
+                var access_name = item.name.split(" ");
+                if (access_name[2] == "Op_Neer") {
+                  // assign "Positie" callback UUID to "Op_Neer" main Blinds item
+                  var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, list_child_pos_UUID[access_name[1]]);
+                  this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
+                }
+            } else {
+              var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this);
+              this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
+            }
 
             if (this.accessoryList.length > 99) {
                 // https://github.com/nfarina/homebridge/issues/509
@@ -135,29 +147,6 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         }
     }
 
-
-    var list_child_pos_UUID = {};
-    // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
-    for (var accessory in this.accessoryList) {
-      if (this.accessoryList[accessory].name.indexOf("Screen") !== -1) {
-        var access_name = this.accessoryList[accessory].name.split(" ");
-        if (access_name[2] == "Positie") {
-          list_child_pos_UUID[this.accessoryList[accessory].name] = this.accessoryList[accessory].uuidAction;
-        }
-      }
-    }
-    for (var accessory in this.accessoryList) {
-      if (this.accessoryList[accessory].name.indexOf("Screen") !== -1) {
-        var access_name = this.accessoryList[accessory].name.split(" ");
-        if (access_name[2] == "Op_Neer") {
-          // assign "Positie" callback UUID to "Op_Neer" main Blinds item
-          this.accessoryList[accessory].initAdditionalListener(list_child_pos_UUID[this.accessoryList[accessory].name]);
-        }
-      }
-    }
-
-
-
     this.log('Platform - Total accessory count ' + this.accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
     return this.accessoryList;
 };
@@ -195,7 +184,22 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
     }
 
-    //if (item.name.indexOf("Screen Slaapkamer") !== -1) {
+    if (item.name.indexOf("Screen Slaapkamer") !== -1) {
+      console.log("Found EIB Blinds!! :-) " + item.name);
+      //console.log(JSON.stringify(item, null, 4));
+      //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
+
+      var room = item.name.split(" ")[1];
+
+      if (item.type == "UpDownDigital") {
+        item.type = "EIBBlinds";
+      } else if (item.type == "InfoOnlyAnalog") {
+        var access_name = item.name.split(" ");
+        if (access_name[2] == "Positie") {
+          list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
+        }
+      }
+    }
     if (0) {
       console.log("Found EIB Blinds!! :-) " + item.name);
       //console.log(JSON.stringify(item, null, 4));

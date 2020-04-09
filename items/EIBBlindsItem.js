@@ -9,13 +9,14 @@ class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
   }
 }
 
-var EIBBlindsItem = function(widget,platform,homebridge, factory) {
+var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid) {
 
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
     this.stateUuid = widget.states.position; //a blind always has a state called position, which is the uuid which will receive the event to read
     this.initialValue = true;
     this.inControl = false;
+    this.posActionUuid = posActionUuid;
 
     //100 means fully open
     this.currentPosition = 100;
@@ -34,11 +35,8 @@ var EIBBlindsItem = function(widget,platform,homebridge, factory) {
 EIBBlindsItem.prototype.initListener = function() {
     console.log("Registering listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
-};
-// Register a listener to be notified of changes in this items value
-EIBBlindsItem.prototype.initAdditionalListener = function(uuid) {
     console.log("Registering additional listener for EIBBlindsItem " + this.name);
-    this.platform.ws.registerListenerForUUID(uuid, this.callBack.bind(this));
+    this.platform.ws.registerListenerForUUID(this.posActionUuid, this.callBack.bind(this));
 };
 
 EIBBlindsItem.prototype.callBack = function(value) {
@@ -101,8 +99,8 @@ EIBBlindsItem.prototype.getOtherServices = function() {
         .on('get', this.getItemPositionState.bind(this))
         .updateValue(this.positionState);
 
-    console.log("Returning otherService!");
-    console.log(JSON.stringify(otherService, null, 4));
+    //console.log("Returning otherService!");
+    //console.log(JSON.stringify(otherService, null, 4));
 
     return otherService;
 };
