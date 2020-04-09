@@ -81,7 +81,6 @@ EIBBlindsItem.prototype.callBack = function(value) {
 };
 
 EIBBlindsItem.prototype.getOtherServices = function() {
-
     var otherService = new this.homebridge.hap.Service.WindowCovering();
 
     otherService.getCharacteristic(this.homebridge.hap.Characteristic.CurrentPosition)

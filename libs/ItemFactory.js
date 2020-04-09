@@ -131,7 +131,6 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         }
     }
 
-    console.log(JSON.stringify(this.knxScreens_Shared, null, 4));
     // PIETER addition: We are going through the list. Each EIBBlindsPositionItem has a link to it's EIBBlinds parent
     //for (accessory in accessoryList) {
     //  if (accessoryList[accessory].name.indexOf("Screen Slaapkamer") !== -1) {
