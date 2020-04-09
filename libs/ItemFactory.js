@@ -103,8 +103,6 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
               this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
             }
 
-
-
             if (this.accessoryList.length > 99) {
                 // https://github.com/nfarina/homebridge/issues/509
                 this.log("Platform - Accessory count limit (100) exceeded so skipping: '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " was skipped.");
@@ -120,7 +118,14 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 var controlRoom = null;
 
 				if (this.platform.rooms.length == 0) {
-					//Show all rooms
+					// Pieter checking for double
+          for (var acces in this.accessoryList) {
+            if ((this.accessoryList[accessory].name) == accessory.name) {
+              console.log("Duplicate!");
+              continue;
+            }
+          }
+          //Show all rooms
 					this.accessoryList.push(accessory);
 
 				} else {
@@ -137,6 +142,12 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
 							if ((this.platform.moodSwitches == 'only') && (this.itemList[key].type !== 'LightControllerV2MoodSwitch')) {
 								this.log('Skipping as only moodswitched selected');
 							} else {
+                for (var acces in this.accessoryList) {
+                  if ((this.accessoryList[accessory].name) == accessory.name) {
+                    console.log("Duplicate in ELSE!");
+                    continue;
+                  }
+                }
 								this.accessoryList.push(accessory);
 							}
 						} else {
