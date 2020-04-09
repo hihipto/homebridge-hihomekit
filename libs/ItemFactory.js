@@ -86,7 +86,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " was skipped.");
         continue;
       }
-
+      console.log("Hello! ");
       if (this.itemList[key].name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screen special treatment
         var access_name = this.itemList[key].name.split(" ");
         if (access_name[2] == "Op_Neer") {
@@ -149,13 +149,13 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     }
     console.log("Progress accessory list!");
     for (var accessory in this.accessoryList) {
-      console.log(this.accessoryList[accessory].name);
+      console.log("Name " + this.accessoryList[accessory].name);
     }
   }
 
   console.log("Returning accessory list!");
   for (var accessory in this.accessoryList) {
-    console.log(this.accessoryList[accessory].name);
+    console.log("Name " + this.accessoryList[accessory].name);
   }
 
   this.log('Platform - Total accessory count ' + this.accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
