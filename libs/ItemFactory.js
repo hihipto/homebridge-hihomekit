@@ -78,6 +78,7 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     }
 
     for (var key in this.itemList) {
+      if (this.itemList.hasOwnProperty(key)) {
             if (!(this.itemList[key].type in exports)){
                 this.log("Platform - The widget '" + this.itemList[key].name + "' of type " + this.itemList[key].type + " is an item not handled.");
                 continue;
