@@ -25,9 +25,17 @@ WaterLevelSensorItem.prototype.callBack = function(value) {
         .getCharacteristic(this.homebridge.hap.Characteristic.WaterLevel)
         .setValue(this.currentWaterLevel);
 };
+//
+//
+// I don't know how to add a Characteristic as a "Service"
+//
 
 WaterLevelSensorItem.prototype.getOtherServices = function() {
-    var otherService = new this.homebridge.hap.Characteristic.WaterLevel(); // not sure what service to link it to, so WaterputSensor as dummy 
+    var otherService = new this.homebridge.hap.Characteristic.WaterLevel(); // not sure what service to link it to, so WaterputSensor as dummy
+//
+//
+//
+//
 
     otherService.getCharacteristic(this.homebridge.hap.Characteristic.WaterLevel)
         .on('get', this.getItemState.bind(this))
