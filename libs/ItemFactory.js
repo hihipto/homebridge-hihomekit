@@ -200,7 +200,6 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
       var room = item.name.split(" ")[1];
-
       if (item.type == "UpDownDigital") {
         item.type = "EIBBlinds";
       } else if (item.type == "InfoOnlyAnalog") {
@@ -210,7 +209,6 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         }
       }
     }
-
 
     if (item.type === "Gate") {
         item.type = "Gate";
