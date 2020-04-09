@@ -151,8 +151,8 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
     }
 
     console.log("Returning accessory list!");
-    for (var accessory in accessoryList) {
-      console.log(accessoryList[accessory].name);
+    for (var accessory in this.accessoryList) {
+      console.log(this.accessoryList[accessory].name);
     }
 
     this.log('Platform - Total accessory count ' + this.accessoryList.length + ' across ' + this.platform.rooms.length + ' rooms.');
