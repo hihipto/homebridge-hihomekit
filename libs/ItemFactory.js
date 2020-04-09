@@ -88,8 +88,8 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
                 continue;
             }
 
-            if (item.name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screen special treatment
-                var access_name = item.name.split(" ");
+            if (this.itemList[key].indexOf("Screen Slaapkamer") !== -1) { // KNX Screen special treatment
+                var access_name = this.itemList[key].name.split(" ");
                 if (access_name[2] == "Op_Neer") {
                   // assign "Positie" callback UUID to "Op_Neer" main Blinds item
                   var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
