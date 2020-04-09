@@ -217,7 +217,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         } else if (item.name.indexOf("Door ") !== -1) {
             item.type = "ContactSensor";
         //Phil: adding watersensor     
-        } else if (item.name.indexOf("Watersensor") !== -1) {
+      } else if (item.name.indexOf("Waters") !== -1) {
             item.type = "LeakSensor";
 
         } else if (item.name.indexOf("Doorbell") !== -1) {
