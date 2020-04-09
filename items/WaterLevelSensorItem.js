@@ -27,7 +27,7 @@ WaterLevelSensorItem.prototype.callBack = function(value) {
 };
 
 WaterLevelSensorItem.prototype.getOtherServices = function() {
-  //  var otherService = new this.homebridge.hap.Service.???????(); // not sure what service to link it to, so WaterputSensor as dummy 
+    var otherService = new this.homebridge.hap.Characteristic.WaterLevel(); // not sure what service to link it to, so WaterputSensor as dummy 
 
     otherService.getCharacteristic(this.homebridge.hap.Characteristic.WaterLevel)
         .on('get', this.getItemState.bind(this))
