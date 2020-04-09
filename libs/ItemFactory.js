@@ -23,7 +23,7 @@ exports.MotionSensor = require('../items/MotionSensorItem.js');
 //Phil: adds leaksensor
 exports.LeakSensor = require('../items/LeakSensorItem.js');
 //Phil: adds WaterLevelSensor
-//exports.WaterLevelSensor = require('../items/WaterLevelSensorItem.js');
+exports.WaterLevelSensor = require('../items/WaterLevelSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
@@ -254,8 +254,8 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
         } else if ((item.name.indexOf("Brightness") !== -1) || (item.name.indexOf("Light Level") !== -1)) {
             item.type = 'LightSensor';
         // Phil: adding WaterLevelSensor
-//        } else if (item.name.indexOf("Waterput 2") !== -1) {
-//            item.type = 'WaterLevelSensor';
+        } else if (item.name.indexOf("Waterput 2") !== -1) {
+            item.type = 'WaterLevelSensor';
 
         } else if (item.name.indexOf("Temperature") !== -1) {
             item.type = 'TemperatureSensor';
