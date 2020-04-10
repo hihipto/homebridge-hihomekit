@@ -6,14 +6,6 @@ var ItemFactory = require('./libs/ItemFactory.js');
 var Utility = require('./libs/Utility.js');
 var WSListener = require('./libs/WSListener.js');
 
-class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
-  constructor() {
-    this.updown = null;
-    this.position = null;
-  }
-}
-
-var knxScreens_Shared = {}; // list to keep the KNX Screens
 
 module.exports = function(homebridge) {
     console.log("homebridge API version: " + homebridge.version);
@@ -89,7 +81,7 @@ function LoxPlatform(log, config) {
 LoxPlatform.prototype.accessories = function(callback) {
     var that = this;
     //this.log("Getting Loxone configuration.");
-    var itemFactory = new ItemFactory.Factory(this,Homebridge, knxScreens_Shared);
+    var itemFactory = new ItemFactory.Factory(this,Homebridge);
     var url = itemFactory.sitemapUrl();
     this.log("Platform - Waiting 8 seconds until initial state is retrieved via WebSocket.");
     setTimeout(function(){
