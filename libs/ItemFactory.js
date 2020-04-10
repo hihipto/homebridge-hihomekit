@@ -203,7 +203,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       var access_name = item.name.split(" ");
       if (access_name[2] == "Positie") {
         factory.list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
-      } else if (access_name[2] == "Go2PosKNX")) {
+      } else if (access_name[2] == "Go2PosKNX") {
         factory.list_child_pos_UUID[access_name[1] + "Go2PosKNX"] = item.uuidAction; // UUID to listen on for position info
       }
     }
