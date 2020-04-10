@@ -86,15 +86,18 @@ EIBBlindsItem.prototype.motionFeedback = function(value) {
 
   if (!this.inControl) { // if we are in control, PositionState is updated by normal Callback
     if (value == 0) {
+      this.log("[blinds] Motion STOPPED UUID " + this.UUID + " posUUID " + this.motionActionUuid);
       this.otherService
           .getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
           .updateValue(this.homebridge.hap.Characteristic.PositionState.STOPPED);
     } else if (value == 1) {
       if (this.currentPosition > 50) { // in homekit 100 == OPEN
+        this.log("[blinds] Motion DECREASING UUID " + this.UUID + " posUUID " + this.motionActionUuid);
         this.otherService
             .getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
             .updateValue(this.homebridge.hap.Characteristic.PositionState.DECREASING);
       } else {
+        this.log("[blinds] Motion INCREASING UUID " + this.UUID + " posUUID " + this.motionActionUuid);
         this.otherService
             .getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
             .updateValue(this.homebridge.hap.Characteristic.PositionState.INCREASING);
