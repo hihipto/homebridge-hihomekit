@@ -193,6 +193,7 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
 
   if (item.name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screens
     console.log("Found EIB Blinds!! :-) " + item.name);
+    var access_name = item.name.split(" ");
     //console.log(JSON.stringify(item, null, 4));
     //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
@@ -200,7 +201,6 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
     if (item.type == "UpDownDigital") {
       item.type = "EIBBlinds";
     } else if (item.type == "InfoOnlyAnalog") {
-      var access_name = item.name.split(" ");
       if (access_name[2] == "Positie") {
         factory.list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
       } //else if (access_name[2] == "Go2PosKNX") {
