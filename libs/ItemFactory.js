@@ -26,14 +26,8 @@ exports.WaterLevelSensor = require('../items/WaterLevelSensorItem.js');
 exports.ContactSensor = require('../items/ContactSensorItem.js');
 exports.LightSensor = require('../items/LightSensorItem.js');
 
-class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
-  constructor() {
-    this.updown = null;
-    this.position = null;
-  }
-}
 
-exports.Factory = function(LoxPlatform, homebridge, knxScreens_Shared) {
+exports.Factory = function(LoxPlatform, homebridge) {
   this.platform = LoxPlatform;
   this.log = this.platform.log;
   this.homebridge = homebridge;
@@ -41,7 +35,6 @@ exports.Factory = function(LoxPlatform, homebridge, knxScreens_Shared) {
   this.catList = {};
   this.roomList = {};
 
-  this.knxScreens_Shared = knxScreens_Shared; // Pieter: Will keep the KNX screens as a list
   this.accessoryList = [];
   this.list_child_pos_UUID = {};
   // Loxone items should be named "Screen [ROOM] [function]"
@@ -201,7 +194,6 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       // Function should be EIBDimmer to send value on a group address to set the blind position
     }
     //console.log(JSON.stringify(item, null, 4));
-    //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
     var room = item.name.split(" ")[1];
     if (item.type == "UpDownDigital") {

@@ -21,21 +21,19 @@ var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, w
     EIBBlindsItem.super_.call(this, widget,platform,homebridge);
 
     this.positionState = this.homebridge.hap.Characteristic.PositionState.STOPPED;
-
-    console.log("Creating EIBBlindsItem " + this.name);
 };
 
 // Register a listener to be notified of changes in this items value
 EIBBlindsItem.prototype.initListener = function() {
-    console.log("Registering listener for EIBBlindsItem " + this.name);
+    this.log("[blinds] Registering listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
-    console.log("Registering additional listener for EIBBlindsItem " + this.name);
+    this.log("[blinds] Registering additional listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.posActionUuid, this.callBack.bind(this));
 };
 
 EIBBlindsItem.prototype.callBack = function(value) {
     //function that gets called by the registered ws listener
-    console.log("Got new state for EIB blind " + value + " and UUID " + this.UUID + " posUUID " + this.posActionUuid);
+    this.log("[blinds] Got new state for EIB blind " + value + " and UUID " + this.UUID + " posUUID " + this.posActionUuid);
 
     //in Homekit, 100% means OPEN while in Loxone this means CLOSED: reverse
     value = parseInt(100 - value);
