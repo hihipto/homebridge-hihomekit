@@ -2,7 +2,7 @@
 
 var request = require("request");
 
-var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, wrActionUuid) {
+var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, wrActionUuid, motionActionUuid) {
 
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
@@ -11,6 +11,7 @@ var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, w
     this.inControl = false;
     this.posActionUuid = posActionUuid;
     this.wrActionUuid = wrActionUuid;
+    this.motionActionUuid = motionActionUuid;
 
     //100 means fully open
     this.currentPosition = 100;
@@ -27,8 +28,10 @@ var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, w
 EIBBlindsItem.prototype.initListener = function() {
     this.log("[blinds] Registering listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.stateUuid, this.callBack.bind(this));
-    this.log("[blinds] Registering additional listener for EIBBlindsItem " + this.name);
+    this.log("[blinds] Registering position listener for EIBBlindsItem " + this.name);
     this.platform.ws.registerListenerForUUID(this.posActionUuid, this.callBack.bind(this));
+    this.log("[blinds] Registering motion listener for EIBBlindsItem " + this.name);
+    this.platform.ws.registerListenerForUUID(this.motionActionUuid, this.motionFeedback.bind(this));
 };
 
 EIBBlindsItem.prototype.callBack = function(value) {
@@ -74,6 +77,12 @@ EIBBlindsItem.prototype.callBack = function(value) {
         .updateValue(value);
 
 };
+
+EIBBlindsItem.prototype.motionFeedback = function(value) {
+  // to listen on KNX motion object
+  this.log("[blinds] Got new motion for EIB blind " + value + " and UUID " + this.UUID + " posUUID " + this.motionActionUuid);
+
+}
 
 EIBBlindsItem.prototype.getOtherServices = function() {
     var otherService = new this.homebridge.hap.Service.WindowCovering();

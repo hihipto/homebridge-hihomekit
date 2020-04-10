@@ -84,7 +84,8 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         if (access_name[2] == "Op_Neer") {
           // assign "Positie" callback UUID to "Op_Neer" main Blinds item
           var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge,
-            this, this.list_child_pos_UUID[access_name[1]], this.list_child_pos_UUID[access_name[1] + "EIBDimmer"]);
+            this, this.list_child_pos_UUID[access_name[1]], this.list_child_pos_UUID[access_name[1] + "EIBDimmer"],
+            this.list_child_pos_UUID[access_name[1] + "Motion"]);
           this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
         } else {
           continue; // If this continue; is not here, we can add an empty item to the accesory list
@@ -206,57 +207,59 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       //}
     } else if (item.type == "EIBDimmer") {
       factory.list_child_pos_UUID[access_name[1] + "EIBDimmer"] = item.uuidAction;
+    } else if (item.type == "InfoOnlyDigital") {
+      factory.list_child_pos_UUID[access_name[1] + "Motion"] = item.uuidAction;
     }
-  }
-
-  if (item.type === "Gate") {
-    item.type = "Gate";
-  }
-
-  if (item.type == "InfoOnlyDigital") {
-    if (item.defaultIcon == '00000000-0000-0021-2000000000000000') {
-      item.type = "DoorBell";
-
-    } else if ((item.name.indexOf("Motion") !== -1) || (item.name.indexOf("Presence") !== -1)) {
-      item.type = "MotionSensor";
-
-    } else if (item.name.indexOf("Door ") !== -1) {
-      item.type = "ContactSensor";
-      //Phil: adding watersensor
-    } else if (item.name.indexOf("Waters") !== -1) {
-      item.type = "LeakSensor";
-
-    } else if (item.name.indexOf("Doorbell") !== -1) {
-      item.type = "DoorBell";
-
-    } else if (item.name.indexOf("WC") !== -1) {
-      item.type = "ContactSensor";
-
+  } else {
+    if (item.type === "Gate") {
+      item.type = "Gate";
     }
 
-  }
+    if (item.type == "InfoOnlyDigital") {
+      if (item.defaultIcon == '00000000-0000-0021-2000000000000000') {
+        item.type = "DoorBell";
 
-  if (item.type == "InfoOnlyAnalog") {
+      } else if ((item.name.indexOf("Motion") !== -1) || (item.name.indexOf("Presence") !== -1)) {
+        item.type = "MotionSensor";
 
-    if (item.name.indexOf("Door Contact") !== -1) {
-      item.type = "ContactSensor";
+      } else if (item.name.indexOf("Door ") !== -1) {
+        item.type = "ContactSensor";
+        //Phil: adding watersensor
+      } else if (item.name.indexOf("Waters") !== -1) {
+        item.type = "LeakSensor";
 
-    } else if (((item.name.indexOf("Motion") !== -1) || (item.name.indexOf("Presence") !== -1)) && (item.name.indexOf("Brightness") == -1)) {
-      item.type = "MotionSensor";
+      } else if (item.name.indexOf("Doorbell") !== -1) {
+        item.type = "DoorBell";
 
-    } else if ((item.name.indexOf("Brightness") !== -1) || (item.name.indexOf("Light Level") !== -1)) {
-      item.type = 'LightSensor';
-      // Phil: adding WaterLevelSensor
-    } else if (item.name.indexOf("Waterput 2") !== -1) {
-      item.type = 'WaterLevelSensor';
+      } else if (item.name.indexOf("WC") !== -1) {
+        item.type = "ContactSensor";
 
-    } else if (item.name.indexOf("Temperature") !== -1) {
-      item.type = 'TemperatureSensor';
+      }
+
     }
-  }
 
-  if (item.type === "EIBDimmer") {
-    item.type = "Dimmer"
+    if (item.type == "InfoOnlyAnalog") {
+
+      if (item.name.indexOf("Door Contact") !== -1) {
+        item.type = "ContactSensor";
+
+      } else if (((item.name.indexOf("Motion") !== -1) || (item.name.indexOf("Presence") !== -1)) && (item.name.indexOf("Brightness") == -1)) {
+        item.type = "MotionSensor";
+
+      } else if ((item.name.indexOf("Brightness") !== -1) || (item.name.indexOf("Light Level") !== -1)) {
+        item.type = 'LightSensor';
+        // Phil: adding WaterLevelSensor
+      } else if (item.name.indexOf("Waterput 2") !== -1) {
+        item.type = 'WaterLevelSensor';
+
+      } else if (item.name.indexOf("Temperature") !== -1) {
+        item.type = 'TemperatureSensor';
+      }
+    }
+
+    if (item.type === "EIBDimmer") {
+      item.type = "Dimmer"
+    }
   }
 
   if (item.name.indexOf("Loxone") !== -1) {
