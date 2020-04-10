@@ -119,7 +119,6 @@ EIBBlindsItem.prototype.getItemCurrentPosition = function(callback) {
 };
 
 EIBBlindsItem.prototype.setItem = function(value, callback) {
-
     //sending new state (pct closed) to loxone
     var self = this;
 
@@ -131,16 +130,13 @@ EIBBlindsItem.prototype.setItem = function(value, callback) {
     this.startedPosition = this.currentPosition;
     this.targetPosition = parseInt(value);
 
-    var command = 0;
-    if (typeof value === 'boolean') {
-        command = value ? 'FullUp' : 'FullDown';
-    } else {
-        //reverse again the value
-        command = "ManualPosition/" + (100 - value);
+    var command = value; //Loxone expects a value between 0 and 100
+    if (typeof this.platform.ws != 'undefined') {
+      this.log("[dimmer] iOS - send brightness message to " + this.name + ": " + value);
+      this.log("[blinds] iOS - send message to " + this.name + ": " + command);
+      this.log("[blinds] msg sent on UUID " + this.wrActionUuid);
+      this.platform.ws.sendCommand(this.wrActionUuid, command);
     }
-    this.log("[blinds] iOS - send message to " + this.name + ": " + command);
-    this.log("[blinds] msg sent on UUID " + this.wrActionUuid);
-    this.platform.ws.sendCommand(this.wrActionUuid, command);
     callback();
 
 };
