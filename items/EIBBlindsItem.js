@@ -80,8 +80,27 @@ EIBBlindsItem.prototype.callBack = function(value) {
 
 EIBBlindsItem.prototype.motionFeedback = function(value) {
   // to listen on KNX motion object
+  // value == 0 Not moving
+  // value == 1 = Moving
   this.log("[blinds] Got new motion for EIB blind " + value + " and UUID " + this.UUID + " posUUID " + this.motionActionUuid);
 
+  if (!this.inControl) { // if we are in control, PositionState is updated by normal Callback
+    if (value == 0) {
+      this.otherService
+          .getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
+          .updateValue(this.homebridge.hap.Characteristic.PositionState.STOPPED);
+    } else if (value == 1) {
+      if (this.currentPosition > 50) { // in homekit 100 == OPEN
+        this.otherService
+            .getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
+            .updateValue(this.homebridge.hap.Characteristic.PositionState.DECREASING);
+      } else {
+        this.otherService
+            .getCharacteristic(this.homebridge.hap.Characteristic.PositionState)
+            .updateValue(this.homebridge.hap.Characteristic.PositionState.INCREASING);
+      }
+    }
+  }
 }
 
 EIBBlindsItem.prototype.getOtherServices = function() {
@@ -130,7 +149,7 @@ EIBBlindsItem.prototype.setItem = function(value, callback) {
     this.startedPosition = this.currentPosition;
     this.targetPosition = parseInt(value);
 
-    var command = (100 - value); //Loxone expects a value between 0 and 100
+    var command = parseInt(100 - value); //Loxone expects a value between 0 and 100
     if (typeof this.platform.ws != 'undefined') {
       this.log("[blinds] iOS - send message to " + this.name + ": " + command + " on UUID " + this.wrActionUuid);
       this.platform.ws.sendCommand(this.wrActionUuid, command);
