@@ -9,7 +9,7 @@ class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
   }
 }
 
-var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid) {
+var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, wrActionUuid) {
 
     this.platform = platform;
     this.uuidAction = widget.uuidAction; //to control a dimmer, use the uuidAction
@@ -17,6 +17,7 @@ var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid) {
     this.initialValue = true;
     this.inControl = false;
     this.posActionUuid = posActionUuid;
+    this.wrActionUuid = wrActionUuid;
 
     //100 means fully open
     this.currentPosition = 100;
@@ -138,7 +139,8 @@ EIBBlindsItem.prototype.setItem = function(value, callback) {
         command = "ManualPosition/" + (100 - value);
     }
     this.log("[blinds] iOS - send message to " + this.name + ": " + command);
-    this.platform.ws.sendCommand(this.uuidAction, command);
+    this.log("[blinds] msg sent on UUID " + this.wrActionUuid);
+    this.platform.ws.sendCommand(this.wrActionUuid, command);
     callback();
 
 };

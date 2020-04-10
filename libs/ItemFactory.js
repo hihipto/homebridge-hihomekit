@@ -90,7 +90,8 @@ exports.Factory.prototype.parseSitemap = function(jsonSitemap) {
         var access_name = this.itemList[key].name.split(" ");
         if (access_name[2] == "Op_Neer") {
           // assign "Positie" callback UUID to "Op_Neer" main Blinds item
-          var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge, this, this.list_child_pos_UUID[access_name[1]]);
+          var accessory = new exports[this.itemList[key].type](this.itemList[key], this.platform, this.homebridge,
+            this, this.list_child_pos_UUID[access_name[1]], this.this.list_child_pos_UUID[access_name[1] + "Go2PosKNX"]);
           this.log("Platform - Accessory Found: " + this.itemList[key].name + " Type " + this.itemList[key].type);
         } else {
           continue; // If this continue; is not here, we can add an empty item to the accesory list
@@ -202,6 +203,8 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
       var access_name = item.name.split(" ");
       if (access_name[2] == "Positie") {
         factory.list_child_pos_UUID[access_name[1]] = item.uuidAction; // UUID to listen on for position info
+      } else if (access_name[2] == "Go2PosKNX")) {
+        factory.list_child_pos_UUID[access_name[1] + "Go2PosKNX"] = item.uuidAction; // UUID to listen on for position info
       }
     }
   }
