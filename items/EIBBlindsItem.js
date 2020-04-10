@@ -2,13 +2,6 @@
 
 var request = require("request");
 
-class KNXScreen { // Pieter adding Screen as object to represent KNX Screens
-  constructor() {
-    this.updown = null;
-    this.position = null;
-  }
-}
-
 var EIBBlindsItem = function(widget,platform,homebridge,factory,posActionUuid, wrActionUuid) {
 
     this.platform = platform;
@@ -132,9 +125,7 @@ EIBBlindsItem.prototype.setItem = function(value, callback) {
 
     var command = (100 - value); //Loxone expects a value between 0 and 100
     if (typeof this.platform.ws != 'undefined') {
-      this.log("[dimmer] iOS - send brightness message to " + this.name + ": " + value);
-      this.log("[blinds] iOS - send message to " + this.name + ": " + command);
-      this.log("[blinds] msg sent on UUID " + this.wrActionUuid);
+      this.log("[blinds] iOS - send message to " + this.name + ": " + command + " on UUID " + this.wrActionUuid);
       this.platform.ws.sendCommand(this.wrActionUuid, command);
     }
     callback();

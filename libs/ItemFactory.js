@@ -191,9 +191,15 @@ exports.Factory.prototype.checkCustomAttrs = function(factory, itemId, platform,
     }
   }
 
-  if (item.name.indexOf("Screen Slaapkamer") !== -1) { // KNX Screens
+  if (item.name.indexOf("Screen") !== -1) { // KNX Screens
     console.log("Found EIB Blinds!! :-) " + item.name);
     var access_name = item.name.split(" ");
+    if (access_name.length < 3) {
+      console.log("Invalid Screen " + access_name +  " needs to be in format Screen Room Function");
+      // Function should be Op_Neer for the main blind item
+      // Function should be Positie to subscribe on the position uuid
+      // Function should be EIBDimmer to send value on a group address to set the blind position
+    }
     //console.log(JSON.stringify(item, null, 4));
     //console.log(JSON.stringify(factory.knxScreens_Shared, null, 4));
 
