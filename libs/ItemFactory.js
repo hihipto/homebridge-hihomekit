@@ -18,7 +18,7 @@ exports.Pushbutton = require('../items/PushbuttonItem.js');
 exports.Colorpicker = require('../items/ColorpickerItem.js');
 exports.Gate = require('../items/GateItem.js');
 exports.DoorBell = require('../items/DoorBellItem.js');
-exports.MotionSensor = require('../items/MotionSensorItem.js');
+//exports.MotionSensor = require('../items/MotionSensorItem.js');
 //Phil: adds leaksensor
 exports.LeakSensor = require('../items/LeakSensorItem.js');
 //Phil: adds WaterLevelSensor
