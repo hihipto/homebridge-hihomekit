@@ -1,0 +1,39 @@
+{
+  "pluginAlias": "hihomekit",
+  "pluginType": "platform",
+  "singular": true,
+  "headerDisplay": "HiHomeKit configuration template",
+  "footerDisplay": "* all fields are mandatory",
+  "schema": {
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "required": true,
+        "default": "Loxone"
+      },
+      "host": {
+        "title": "IP Address",
+        "type": "string",
+        "required": true,
+        "format": "ipv4"
+      },
+      "port":{
+        "title": "Port number",
+        "type": "string",
+        "required": true,
+        "default": "80"
+      },
+      "username":{
+        "title": "User Name",
+        "type": "string",
+        "required": true
+      },
+      "password":{
+        "title": "Password",
+        "type": "string",
+        "required": true
+      }
+    }
+  }
+}
