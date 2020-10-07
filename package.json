@@ -1,6 +1,6 @@
 {
   "private": true,
-  "displayName": "hihomekit"
+  "displayName": "hihomekit",
   "name": "homebridge-hihomekit",
   "version": "1.1.4",
   "description": "Websocket based Loxone plugin for homebridge (https://github.com/nfarina/homebridge)",
@@ -23,12 +23,6 @@
   "engines": {
     "node": ">=10.17.0",
     "homebridge": ">=1.0.0"
-  },
-  "scripts": {
-  "lint": "eslint src/**.ts --max-warnings=0",
-  "watch": "npm run build && npm link && nodemon",
-  "build": "rimraf ./dist && tsc",
-  "prepublishOnly": "npm run lint && npm run build"
   },
   "dependencies": {
     "node-lox-ws-api": "^0.4.5",
